@@ -4,30 +4,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {useState} from "react";
 
 function Form() {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({
+    const { register, handleSubmit, watch, reset,formState: { errors } } = useForm({
         resolver: yupResolver(userSchema),
     });
 
-    const Name=watch("Name");
+    const name=watch("name");
     const [data, setData] = useState("");
     
-    const submitForm = (data) => {
-        console.log(data)
-        setData(JSON.stringify(data , null, '\t'))
-    };
-
-    const deleteform =() =>
-    {
-        document.getElementById("forms").reset();
-    };
+    const submitForm = (data) => {};
 
     return (
-        <div className='Form'>
+        <div className='Form' id="form1">
             <div className="inputs">
                 <form onSubmit={handleSubmit(submitForm)} id="forms">
-                    <input type="text" name="Name" placeholder="Name" {...register('Name')} />
-                    <p>{errors.Name?.message}</p>
-                    <p>{Name}</p>
+                    <input type="text" name="name" placeholder="Name" {...register('name')} />
+                    <p>{errors.name?.message}</p>
+                    <p>{name}</p>
                     <input type="email" name="Email" placeholder='Email' {...register('Email')} />
                     <p>{errors.Email?.message}</p>
                     <input type="text" name="password" placeholder='password' {...register('password')} />
@@ -48,7 +40,7 @@ function Form() {
                         <option value="other">Other</option>
                     </select>
                     <p>{errors.gender?.message}</p>
-                    <button type="button" onClick={()=>{deleteform()}}>Clear</button>
+                    <button type="button" onClick={()=>{reset();}}>Reset</button>
                     <input type="submit" id="submit" />
                     <p>{data}</p>
                 </form>

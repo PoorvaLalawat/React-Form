@@ -5,5 +5,5 @@ export const userSchema = Yup.object({
     Email: Yup.string().email().required(),
     password: Yup.string().min(4).max(10).required(),
     Age: Yup.number().positive().integer().required(),
-    confirmPassword: Yup.string().oneOf([Yup.ref("password"), null])
+    confirmPassword: Yup.string().oneOf([Yup.ref("password"), null]) 
 });
